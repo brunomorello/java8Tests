@@ -1,5 +1,7 @@
 package br.com.bmo.java8tips.model;
 
+import java.util.Objects;
+
 public class Manager extends Employee {
 
     private Employee assistant;

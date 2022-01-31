@@ -19,7 +19,7 @@ public class EmployeeUtils {
 
     public static List<Employee> createEmployees() {
         Employee e1 = new Employee("123", "Fulano", 1000.0, "Brazil");
-        Manager e2 = new Manager("EXEC123", "Fulano Executive", 10000000.0, "Brazil");
+        Manager e2 = new Manager("EXEC123", "Fulano Executive", 100000.0, "Brazil");
         Employee e3 = new Employee("3322", "Ciclano", 10000.0, "Brazil");
         e1.setManager(e2);
         e2.setManager(e2);

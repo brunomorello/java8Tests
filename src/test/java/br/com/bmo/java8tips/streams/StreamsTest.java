@@ -1,9 +1,10 @@
-package br.com.bmo.java8tips.streams.sort;
+package br.com.bmo.java8tips.streams;
 
 import br.com.bmo.java8tips.model.Employee;
 import br.com.bmo.java8tips.model.EmployeeUtils;
 import org.junit.jupiter.api.Test;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SortStreamsTest {
+public class StreamsTest {
     List<Employee> employees = EmployeeUtils.createEmployeesFaker(5);
 
     @Test
@@ -41,5 +42,15 @@ public class SortStreamsTest {
 
         System.out.println(employeesSet);
         assertNotNull(employeesSet);
+    }
+
+    @Test
+    void testSort() {
+        employees.sort(Comparator.comparingDouble(Employee::getSalary));
+
+        employees.stream()
+                .mapToDouble(Employee::getSalary)
+                .average()
+                .ifPresent(value -> System.out.printf("Employees Salary average is %f", value));
     }
 }

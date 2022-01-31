@@ -70,11 +70,11 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return id.equals(employee.id) && Objects.equals(name, employee.name) && Objects.equals(salary, employee.salary) && Objects.equals(manager, employee.manager);
+        return Objects.equals(id, employee.id) && Objects.equals(name, employee.name) && Objects.equals(salary, employee.salary) && Objects.equals(manager, employee.manager) && Objects.equals(location, employee.location) && Objects.equals(favoriteFood, employee.favoriteFood);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, salary, manager);
+        return Objects.hash(id, name, salary, manager, location, favoriteFood);
     }
 }
