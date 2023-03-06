@@ -1,10 +1,8 @@
 package br.com.bmo.java8tips.datetime;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.Period;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.TimeZone;
 
 public class DateTimeApi {
     public static void main(String[] args) {
@@ -27,5 +25,7 @@ public class DateTimeApi {
         System.out.println("Date diff 2...");
         Period dateDiff2 = LocalDate.now().until(trip.toLocalDate());
         System.out.println(dateDiff2.plusDays(2).getDays());
+
+        System.out.println(LocalDateTime.ofInstant(Instant.ofEpochSecond(1558214184499l), TimeZone.getDefault().toZoneId()));
     }
 }
