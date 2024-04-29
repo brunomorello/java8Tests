@@ -16,7 +16,7 @@ public class GenericAndBoundedTypes {
         return val1.doubleValue() + val2.doubleValue();
     }
 
-    public static <T extends Comparable> int countGreaterItems(T[] items, T item) {
+    public static <T extends Comparable> int countGreaterItems(T item, T... items) {
         int count = 0;
         for (T auxItem : items) {
             if (auxItem.compareTo(item) > 0) {
