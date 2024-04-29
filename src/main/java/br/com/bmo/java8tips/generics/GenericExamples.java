@@ -18,7 +18,7 @@ public class GenericExamples<T> {
         }
     }
 
-    public <X, Y> boolean checkEquality(X x, Y y) {
-        return x.equals(y);
+    public <T> boolean checkEquality(T t1, T t2) {
+        return t1.equals(t2);
     }
 }
