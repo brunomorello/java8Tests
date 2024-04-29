@@ -11,6 +11,20 @@ public class GenericAndBoundedTypes {
         return val1.compareTo(val2) < 0 ?
             val1 : val2;
     }
+
+    public static <T extends Number> double add(T val1, T val2) {
+        return val1.doubleValue() + val2.doubleValue();
+    }
+
+    public static <T extends Comparable> int countGreaterItems(T[] items, T item) {
+        int count = 0;
+        for (T auxItem : items) {
+            if (auxItem.compareTo(item) > 0) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
 
 class Person implements Comparable<Person> {
