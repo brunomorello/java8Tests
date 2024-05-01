@@ -3,9 +3,6 @@ package br.com.bmo.java8tips.generics;
 import java.util.*;
 public class Exercise {
     public void runExercise() {
-
-        // you have to implement the other classes such that the following code can run without any error
-
         Library<Algorithm> library = new Library<>();
         library.add(new SearchAlgorithm());
         library.add(new SortingAlgorithm());
@@ -49,7 +46,7 @@ class GraphAlgorithm implements Algorithm {
     }
 }
 
-class Library<T> {
+class Library<T extends Algorithm> {
 
     List<T> algorithms;
 
