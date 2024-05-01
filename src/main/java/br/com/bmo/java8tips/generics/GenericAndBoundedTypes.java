@@ -1,5 +1,7 @@
 package br.com.bmo.java8tips.generics;
 
+import java.util.List;
+
 public class GenericAndBoundedTypes {
 
     public static void main(String[] args) {
@@ -24,6 +26,29 @@ public class GenericAndBoundedTypes {
             }
         }
         return count;
+    }
+
+    // Bounded Type Param to handle both lower and upper bounds
+    public static <T> void copy(List<? extends T> source, List<? super T> destination) {
+        for (T sourceItem : source) {
+            destination.add(sourceItem);
+        }
+    }
+
+    // Upper bounded wildcard example
+    public static double sumAll(List<? extends Number> sourceList) {
+        double sum = 0;
+        for (Number n : sourceList) {
+            sum += n.doubleValue();
+        }
+        return sum;
+    }
+
+    // Lower bounded wildcard example
+    public static void showAll(List<? super Number> sourceList) {
+        for (Object item : sourceList) {
+            System.out.println(item);
+        }
     }
 }
 

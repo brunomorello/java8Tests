@@ -2,6 +2,11 @@ package br.com.bmo.java8tips.generics;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GenericAndBoundedTypesTest {
@@ -22,5 +27,39 @@ class GenericAndBoundedTypesTest {
 
         String[] strList = {"a", "b", "c", "d", "e", "f", "g"};
         assertEquals(0, GenericAndBoundedTypes.countGreaterItems("g", strList));
+    }
+
+    @Test
+    void copyLowerAndUpperBounded() {
+        List<Double> doubleList = Arrays.asList(1.5, 2.2, 4.12);
+        List<Double> destinationList = new ArrayList<>();
+        GenericAndBoundedTypes.copy(doubleList, destinationList);
+
+        assertEquals(doubleList, destinationList);
+        System.out.println(destinationList);
+    }
+
+    @Test
+    void copyLowerAndUpperBoundedStr() {
+        List<String> stringList = Arrays.asList("abc", "def", "ghi");
+        List<String> destinationList = new ArrayList<>();
+        GenericAndBoundedTypes.copy(stringList, destinationList);
+
+        assertEquals(stringList, destinationList);
+        System.out.println(destinationList);
+    }
+
+    @Test
+    void testUpperBoundedExample() {
+        assertEquals(8, GenericAndBoundedTypes.sumAll(Arrays.asList(2, 2, 3, 1)));
+    }
+
+    @Test
+    void testLowerBoundedExample() {
+        List<? super Number> items = new ArrayList<>();
+        items.add(3);
+        items.add(231.2);
+        items.add(21.232f);
+        GenericAndBoundedTypes.showAll(items);
     }
 }

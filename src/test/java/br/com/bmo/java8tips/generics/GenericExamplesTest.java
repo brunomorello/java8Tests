@@ -2,6 +2,8 @@ package br.com.bmo.java8tips.generics;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GenericExamplesTest {
@@ -37,5 +39,12 @@ class GenericExamplesTest {
         assertFalse(genericExamples.checkEquality(10.5, "10.5"));
         assertTrue(genericExamples.checkEquality("10.51", "10.51"));
 
+    }
+
+    @Test
+    void greaterItem() {
+        GenericExamples<Object> genericExamples = new GenericExamples<>();
+
+        assertEquals(12, genericExamples.greaterItem(Arrays.asList(2, 3, 12, 5, 8, 9 , 11)));
     }
 }
