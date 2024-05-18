@@ -13,5 +13,6 @@ public class DeadLockSimulator {
         trainA.start();
         trainA.join(2);
         trainB.start();
+        trainB.join();
     }
 }

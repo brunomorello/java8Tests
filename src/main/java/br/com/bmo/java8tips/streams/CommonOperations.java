@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class CommonOperations {
@@ -116,7 +117,7 @@ public class CommonOperations {
 
         List<Integer> totalEmployeesByCountry = Arrays.asList(5, 10, 20);
         Integer totalOfEmployees = totalEmployeesByCountry.stream()
-                .reduce(2, (integer, integer2) -> integer + integer2);
+                .reduce(0, (integer, integer2) -> integer + integer2);
         System.out.println("World Wide total of Employees: " + totalOfEmployees);
     }
 
@@ -144,5 +145,9 @@ public class CommonOperations {
 
         System.out.println("testReducing...");
         new CommonOperations().testReducing();
+
+        IntStream.range(0,10)
+                .filter(x -> x % 2 == 0)
+                .forEach(x -> System.out.print(x + " "));
     }
 }

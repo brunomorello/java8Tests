@@ -4,10 +4,12 @@ import br.com.bmo.java8tips.model.Employee;
 import br.com.bmo.java8tips.model.EmployeeUtils;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -52,5 +54,17 @@ public class StreamsTest {
                 .mapToDouble(Employee::getSalary)
                 .average()
                 .ifPresent(value -> System.out.printf("Employees Salary average is %f", value));
+    }
+
+    @Test
+    void distinctString() {
+        String[] strArray = {"hello", "shell"};
+        String distinct = Stream.of(strArray)
+                .map(s -> s.split(""))
+                .flatMap(Arrays::stream)
+                .distinct()
+                .collect(Collectors.joining());
+
+        assertEquals("helos", distinct);
     }
 }
