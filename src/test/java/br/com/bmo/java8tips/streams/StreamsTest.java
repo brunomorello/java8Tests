@@ -4,14 +4,20 @@ import br.com.bmo.java8tips.model.Employee;
 import br.com.bmo.java8tips.model.EmployeeUtils;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -66,5 +72,21 @@ public class StreamsTest {
                 .collect(Collectors.joining());
 
         assertEquals("helos", distinct);
+    }
+
+    @Test
+    void distinctString2() {
+        String[] arr = {"d","b","c","b","c","a"};
+
+        Map<String, List<String>> stringListMap = Stream.of(arr)
+                .collect(Collectors.groupingBy(String::toString));
+        List<String> distinctArr = new ArrayList<>(stringListMap.size());
+
+        for (int i = 0; i < arr.length; i++) {
+            if (stringListMap.get(arr[i]).size() == 1) {
+                distinctArr.add(arr[i]);
+            }
+        }
+        assertEquals(2, distinctArr.size());
     }
 }

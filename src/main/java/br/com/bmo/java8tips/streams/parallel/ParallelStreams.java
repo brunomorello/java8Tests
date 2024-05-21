@@ -8,6 +8,8 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 public class ParallelStreams {
     List<Employee> employeeList = EmployeeUtils.createEmployeesFaker(30);
@@ -68,6 +70,30 @@ public class ParallelStreams {
         System.out.printf("%s %d %s", "Aggregate employees took ", duration.toMillis(),  " ms in Parallel Mode");
     }
 
+    private static long sum(long n) {
+        return LongStream.rangeClosed(1, n).reduce(0L, Long::sum);
+    }
+
+    private static long sumParallel(long n) {
+        return LongStream.rangeClosed(1,n).parallel()
+                .reduce(0L, Long::sum);
+    }
+
+    private static boolean isPrime(long n) {
+        if (n <= 1) return false;
+        if (n == 2) return true;
+        if (n % 2 == 0) return false;
+
+        long maxDivisor = (long) Math.sqrt(n);
+
+        for (int i = 3; i <= maxDivisor; i+=2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
 //        System.out.println("serial stream...");
 //        new ParallelStreams().testSerialStream();
@@ -75,7 +101,34 @@ public class ParallelStreams {
 //        System.out.println("parallel stream...");
 //        new ParallelStreams().testParallelStream();
 
-        System.out.println("testCollectionParallelStream...");
-        new ParallelStreams().testPerformance();
+//        System.out.println("testCollectionParallelStream...");
+//        new ParallelStreams().testPerformance();
+
+        long start = System.currentTimeMillis();
+        long sum = ParallelStreams.sum(2000000000);
+        long end = System.currentTimeMillis();
+        System.out.println(String.format("sum sequential: %d in %d ms", sum, (end - start)));
+
+        start = System.currentTimeMillis();
+        long sumParallel = ParallelStreams.sumParallel(2000000000);
+        end = System.currentTimeMillis();
+        System.out.println(String.format("sum parallelized: %d in %d ms", sumParallel, (end - start)));
+
+        System.out.println("==============");
+
+        start = System.currentTimeMillis();
+        long qntPrimeNumbers = IntStream.rangeClosed(2, Integer.MAX_VALUE / 100)
+                .filter(ParallelStreams::isPrime)
+                .count();
+        end = System.currentTimeMillis();
+        System.out.println(String.format("qntPrimeNumbers sequential: %d in %d ms", qntPrimeNumbers, (end - start)));
+
+        start = System.currentTimeMillis();
+        long qntPrimeNumbersParallel = IntStream.rangeClosed(2, Integer.MAX_VALUE / 100)
+                .parallel()
+                .filter(ParallelStreams::isPrime)
+                .count();
+        end = System.currentTimeMillis();
+        System.out.println(String.format("qntPrimeNumbers parallel: %d in %d ms", qntPrimeNumbersParallel, (end - start)));
     }
 }
