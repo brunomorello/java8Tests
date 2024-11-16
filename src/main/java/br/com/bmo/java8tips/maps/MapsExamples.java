@@ -1,5 +1,6 @@
 package br.com.bmo.java8tips.maps;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -25,6 +26,13 @@ public class MapsExamples {
             System.out.println(String.format("%s - %d", key, hashMap.get(key)));
         }
 
+        Map<String, String> test = new HashMap<>();
+        test.put("123", "1");
+
+        hashMap.keySet()
+                .stream()
+                .map(key -> Long.valueOf(key));
+
         System.out.println("==================");
 
         // doubly linked list connecting the inserted items
@@ -47,5 +55,7 @@ public class MapsExamples {
         for (String key : linkedHashMap.keySet()) {
             System.out.println(String.format("%s - %d", key, linkedHashMap.get(key)));
         }
+
+        Collections.emptyMap();
     }
 }

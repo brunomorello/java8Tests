@@ -1,11 +1,15 @@
 package br.com.bmo.java8tips.set;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class SetsExample {
     public static void main(String[] args) {
@@ -39,6 +43,13 @@ public class SetsExample {
         System.out.println("========== LinkedHashSet ==========");
 
         // LinkedHashSet preserves the insertion order
+        int arr[] = {1,2,2,4,5};
+        List<Integer> integerList = Arrays.stream(arr).boxed().collect(Collectors.toList());
+        Set<Integer> test = new LinkedHashSet<>();
+        test.addAll(integerList);
+
+        System.out.println(test);
+
         Set<String> linkedHashSet = new LinkedHashSet<>();
         linkedHashSet.add("Adam");
         linkedHashSet.add("Mary");

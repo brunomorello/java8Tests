@@ -42,4 +42,14 @@ class ListsExerciseTest {
         System.out.println(arrayList);
         System.out.println(linkedList);
     }
+
+    @Test
+    void testAddingMoreItemsThanItsCapacity() {
+        ArrayList<String> strings = new ArrayList<>(2);
+        strings.add("abc");
+        strings.add("efg");
+        strings.add(null);
+
+        System.out.println(strings);
+    }
 }

@@ -10,8 +10,6 @@ public class PairPossibleNumbers {
         List<Integer> nums1 = Arrays.asList(1, 2, 3);
         List<Integer> nums2 = Arrays.asList(4, 5);
 
-        // implement your algorithm here (the pairs will be the result)
-        // List<List<Integer>> pairs = ...;
         List<List<Integer>> pairs = nums1.stream()
                 .flatMap(n -> nums2.stream()
                         .map(integer -> Arrays.asList(n, integer))
