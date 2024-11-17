@@ -1,9 +1,11 @@
 package br.com.bmo.java8tips.maps;
 
+import java.util.AbstractMap;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ForkJoinPool;
 import java.util.regex.Pattern;
 
 public class MapsExample2 {
@@ -26,6 +28,9 @@ public class MapsExample2 {
         test3.put("abc", "19");
         test3.put("3", "12");
 
+        int commonPoolParallelism = ForkJoinPool.getCommonPoolParallelism();
+        System.out.println(commonPoolParallelism);
+
         MapsExample2 mapsExample2 = new MapsExample2();
         System.out.println(mapsExample2.count(test, test2, test3));
     }
@@ -36,14 +41,10 @@ public class MapsExample2 {
                 .flatMap(stringStringMap -> stringStringMap.entrySet()
                         .stream()
                         .filter(currEntry -> Pattern.matches("\\d", currEntry.getKey()))
+                        .map(currEntry -> new AbstractMap.SimpleEntry<>(Long.valueOf(currEntry.getKey()), Long.valueOf(currEntry.getValue())))
                 )
                 .collect(HashMap::new,
-                        (map, entry) -> {
-                            Long currKey = Long.valueOf(entry.getKey());
-                            Long currVal = Long.valueOf(entry.getValue());
-
-                            map.put(currKey, Optional.ofNullable(map.get(currKey)).orElse(0l) + currVal);
-                        },
+                        (map, entry) -> map.put(entry.getKey(), Optional.ofNullable(map.get(entry.getKey())).orElse(0l) + entry.getValue()),
                         HashMap::putAll
                 );
 
